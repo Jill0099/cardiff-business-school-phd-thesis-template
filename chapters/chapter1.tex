@@ -92,7 +92,7 @@ Section~\ref{sec:ch1-conclusion} concludes.
 
 Figure~\ref{fig:ch1-framework} summarises the conceptual model.
 
-\begin{figure}[htbp]
+\begin{figure}[p]
 \centering
 \begin{tikzpicture}[
     >=stealth,
@@ -181,7 +181,20 @@ $\beta_1 > 0$.
 
 Table~\ref{tab:ch1-descriptive} reports the descriptive statistics.
 
-\begin{table}[htbp]
+% [p] sends the table to a float page rather than squeezing it beside the
+% text -- the empirical finance convention, and what a full-width
+% regression table needs anyway.
+%
+% Note what LaTeX does with it: a float page holds as many floats as fit,
+% so the two demo tables and the framework figure below all land on one
+% page. Real regression tables are large enough that each takes a page of
+% its own, so this does not happen in a finished thesis. If yours do pack
+% together, they are small enough to sit inline -- use [htbp] for those.
+%
+% For a journal submission the convention is the opposite: markers in the
+% text, exhibits at the end. See the float-placement note in main.tex --
+% switch it there rather than moving anything by hand.
+\begin{table}[p]
     \centering
     \caption{Descriptive statistics}
     \label{tab:ch1-descriptive}
@@ -211,7 +224,7 @@ Table~\ref{tab:ch1-descriptive} reports the descriptive statistics.
 Table~\ref{tab:ch1-baseline} reports estimates of
 Equation~\eqref{eq:ch1-baseline}.
 
-\begin{table}[htbp]
+\begin{table}[p]
     \centering
     \caption{Baseline results}
     \label{tab:ch1-baseline}

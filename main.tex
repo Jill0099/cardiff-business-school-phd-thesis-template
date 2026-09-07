@@ -213,6 +213,35 @@
 % Section 6.5 also asks that text not be placed over images. If you
 % annotate a figure, put the labels beside the image or in the caption.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% WHERE TABLES AND FIGURES GO
+%
+% The policy is silent on placement. Section 6.4 only requires that
+% tables, figures and appendices stay inside the single page-number
+% sequence, which they do either way. So this is convention -- and the
+% convention differs between a thesis and a journal submission.
+%
+% A THESIS is the final artefact. Nobody typesets it afterwards, and
+% your examiners read exactly what you submit, so the exhibits stay in
+% the chapter. In empirical finance they conventionally take a float
+% page of their own -- \begin{table}[p] -- because a regression table
+% rarely fits beside the text discussing it. That is what the worked
+% tables in chapters/chapter1.tex do.
+%
+% A JOURNAL SUBMISSION is the opposite. JF, JFE, RFS and JFQA want
+% "[Table 1 about here]" in the text with the exhibits collected at the
+% end, because their typesetters place the floats. When you cut a
+% chapter into a submission, uncomment the two lines below rather than
+% moving anything by hand: endfloat moves every float to the end and
+% leaves the markers behind for you.
+%
+%   \usepackage[tablesfirst]{endfloat}
+%   \renewcommand{\efloatseparator}{\mbox{}}
+%
+% Use \FloatBarrier (from placeins, already loaded) to stop a float
+% drifting past a section heading it belongs to.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % Hyperlinks -- loaded late; cleveref must follow hyperref.
 \usepackage[bookmarks=true, hidelinks]{hyperref}
 \hypersetup{

@@ -26,7 +26,7 @@ metadata block at the top of `main.tex`.
 <td align="center"><sub><b>Title page</b><br>§5.3 &amp; §5.4 compliant</sub></td>
 <td align="center"><sub><b>Contents</b><br>§5.2</sub></td>
 <td align="center"><sub><b>Chapter opening</b><br>Arial, 1.5 spacing, left-aligned</sub></td>
-<td align="center"><sub><b>Worked table</b><br>copy it for your own results</sub></td>
+<td align="center"><sub><b>Exhibits on a float page</b><br>the finance convention; §6.4 keeps them in the page sequence</sub></td>
 </tr>
 </table>
 
@@ -310,6 +310,26 @@ It ships with two worked exhibits to copy: a **descriptive statistics table** an
 a **four-column regression table** with a fixed-effects ladder, clustered
 standard errors in parentheses and significance stars — both `booktabs`, with
 placeholder cells (`[.]`, `[N]`) rather than numbers.
+
+### Where tables and figures go
+
+The policy is silent on placement — §6.4 only requires that tables, figures and
+appendices stay inside the single page-number sequence, which they do either
+way. So this is convention, and the convention **differs between a thesis and a
+journal submission**:
+
+- **A thesis** is the final artefact. Nobody typesets it afterwards and your
+  examiners read exactly what you submit, so exhibits stay in the chapter. In
+  empirical finance they take a float page of their own — `\begin{table}[p]` —
+  because a regression table rarely fits beside the text discussing it. **That is
+  the default here.**
+- **A journal submission** is the opposite. JF, JFE, RFS and JFQA want
+  `[Table 1 about here]` in the text with the exhibits collected at the end,
+  because their typesetters place the floats.
+
+When you cut a chapter into a submission, uncomment the two `endfloat` lines in
+`main.tex` rather than moving anything by hand — it relocates every float and
+leaves the markers behind for you. Both configurations are tested.
 
 The comments in the file are prompts about what belongs in each section. Delete
 them as you write.
