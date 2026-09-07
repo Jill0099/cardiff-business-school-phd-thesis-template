@@ -15,6 +15,13 @@
 #        of the topic clearly justifies it.
 #   5.5  The final count goes on the Statements and Declarations Form.
 #
+# Scope (1.1, 1.2): the policy covers PhD, MD, EngD, professional
+# doctorates and MPhil. It does NOT cover the PhD by Published Works,
+# higher doctorates, or MRes -- different rules apply to those.
+#
+# Practice-led and Creative and Critical Writing submissions have their
+# own limits under 4.8-4.9, not the ones below.
+#
 # Those exclusions are encoded in main.tex as TeXcount directives
 # (%TC:ignore around the front matter, appendices and bibliography;
 # %TC:macro \footnote [ignore]) and by the weights below, which count

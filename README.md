@@ -35,9 +35,23 @@ the output.
 
 ---
 
-> **Check the policy yourself before submitting.** It is revised periodically,
-> and this template reflects the version current when it was written. The clause
-> citations are there to make re-checking quick, not to substitute for it.
+> **Scope of what has been checked.** Every row in the table below was read out
+> of the [policy PDF][policy] and is cited by clause, so you can re-check each
+> one in a few minutes. Two caveats:
+>
+> - The policy is revised periodically. This reflects the version current when
+>   the template was written; the citations exist to make re-checking quick, not
+>   to substitute for it.
+> - **The paper-style framing is not policy-checked.** §8.1 permits a "thesis
+>   with publication" and directs it to a *separate* document — *Presentation of
+>   Research Degree Theses: Guidance on the Inclusion of Papers and Published
+>   Work* — which is not on the public website. If you are submitting in that
+>   format, get that guidance from the intranet or your PGR office and check the
+>   chapter structure and preface against it. Everything below still applies;
+>   that guidance may add to it.
+>
+> The policy also covers PhD, MD, EngD, professional doctorates and MPhil only
+> (§1.1–1.2): not the PhD by Published Works, higher doctorates or MRes.
 
 ---
 
@@ -197,7 +211,10 @@ already handled here.
 | §5.1 | Required preliminary pages: title page, summary (**max 300 words**), contents list, and acknowledgements where a sponsor expects them | Assembled in that order in `main.tex` |
 | §5.2 | Lists of tables and figures go **immediately after** the contents list | Ordered accordingly |
 | §5.6 | Dedication and acknowledgements come **after** the required pages | Ordered accordingly |
-| §5.7 | A preface may explain how any papers relate to the thesis | `frontmatter/preface.tex` — a co-authorship statement for a three-essay thesis |
+| §5.7 | A preface may explain how any papers you authored or co-authored relate to the **chapters** of the thesis | `frontmatter/preface.tex` — but see the caveat above; §8 sends paper-format theses to separate guidance |
+| §7.3 | Contributions from collaborators go in the **acknowledgements**, and must be referenced in the main text | Noted in `frontmatter/acknowledgements.tex` |
+| §9.2 | No contact details or confidential information about yourself or others, anywhere in the thesis | Noted in `frontmatter/acknowledgements.tex` |
+| §4.7 | Appendices where the material is a useful addition to the work | Noted in `chapters/appendix.tex` |
 | §6.1 | Font recommended for easy reading — **sans serif** such as Arial, Tahoma, Verdana — at **no less than 12 pt** | Arial by default, with a one-line switch back to Times |
 | §6.2 | **Left-aligned, not justified**; line spacing wide enough for accessibility, "e.g. 1.5" | `\RaggedRight` and `\onehalfspacing` |
 | §6.3 | Footnotes and captions **no smaller than 11 pt** | `\footnotesize` redefined to 11 pt |
@@ -205,10 +222,14 @@ already handled here.
 | §4.2 | PhD (standard format): **80,000 words** | `tools/wordcount.sh` |
 | §4.3 | The count **excludes** summary, acknowledgements, declarations, contents, appendices, tables, diagrams and figures, references, bibliography, footnotes and endnotes | Encoded as TeXcount directives in `main.tex` |
 
-**There is no declaration page in this template, and that is deliberate.** Cardiff
-collects the statements and declarations on a separate signed form (Appendix 1
-of the policy), not bound into the thesis. The final word count goes on that form
-too (§5.5), not in the thesis.
+**There is no declaration page in this template, and that is deliberate.** The
+statements and declarations are, in the policy's own words, "to be Signed by the
+Candidate and Submitted **loose with the Thesis**" (Appendix 1) — so they are not
+bound in and not typeset. The final word count goes on that form too (§5.5),
+not in the thesis.
+
+If you have seen older Cardiff theses with a bound-in declaration page, that is
+why: the requirement changed. Check the current form with your PGR office.
 
 ---
 
