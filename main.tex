@@ -242,11 +242,14 @@
 % that form too (Section 5.5), not in the thesis.
 
 %TC:ignore
-\input{frontmatter/titlepage.tex}
-
+% Policy Section 6.4: the preliminary pages are numbered in roman
+% numerals, and page numbers appear on every page except the title page.
+% So the title page is page i and simply displays no number -- rather
+% than sitting outside the sequence and forcing the count to restart,
+% which would leave hyperref with two anchors named page.1.
 \pagenumbering{roman}
-\setcounter{page}{2}   % the title page counts as page i but shows no number
 
+\input{frontmatter/titlepage.tex}
 \input{frontmatter/summary.tex}
 
 %------------------------------- CONTENTS -----------------------------

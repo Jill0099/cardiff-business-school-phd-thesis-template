@@ -13,17 +13,160 @@ metadata block at the top of `main.tex`.
 
 [policy]: https://www.cardiff.ac.uk/__data/assets/pdf_file/0010/1467235/Submission-and-Presentation-of-Research-Degree-Theses.pdf
 
+## What it produces
+
+<table>
+<tr>
+<td width="25%"><a href="docs/preview/01-title.png"><img src="docs/preview/01-title.png" alt="Title page in the Appendix 3 format: plain background, no logo"></a></td>
+<td width="25%"><a href="docs/preview/02-contents.png"><img src="docs/preview/02-contents.png" alt="Contents list, itemising chapters and sub-divisions"></a></td>
+<td width="25%"><a href="docs/preview/03-chapter.png"><img src="docs/preview/03-chapter.png" alt="Chapter opening, showing the empirical chapter skeleton"></a></td>
+<td width="25%"><a href="docs/preview/04-table.png"><img src="docs/preview/04-table.png" alt="Worked regression table with a fixed-effects ladder"></a></td>
+</tr>
+<tr>
+<td align="center"><sub><b>Title page</b><br>§5.3 &amp; §5.4 compliant</sub></td>
+<td align="center"><sub><b>Contents</b><br>§5.2</sub></td>
+<td align="center"><sub><b>Chapter opening</b><br>Arial, 1.5 spacing, left-aligned</sub></td>
+<td align="center"><sub><b>Worked table</b><br>copy it for your own results</sub></td>
+</tr>
+</table>
+
+Regenerate these with `./tools/preview.sh` after changing anything that alters
+the output.
+
+---
+
 > **Check the policy yourself before submitting.** It is revised periodically,
 > and this template reflects the version current when it was written. The clause
 > citations are there to make re-checking quick, not to substitute for it.
 
 ---
 
-## Quick start
+## Installation
+
+Two routes. Overleaf needs nothing installed; a local install gives you a faster
+edit-compile loop and works offline.
+
+### Option A — Overleaf (no installation)
+
+1. Download this repository as a zip: **Code → Download ZIP** on GitHub.
+2. In Overleaf: **New Project → Upload Project**, and select the zip.
+3. **Menu → Compiler → XeLaTeX**. This step is required — the template uses
+   `fontspec` and `unicode-math`, which pdfLaTeX cannot compile.
+4. **Menu → Main document → `main.tex`** if it is not already selected.
+
+Overleaf has Arial available, so the font comes out as intended.
+
+### Option B — Install locally
+
+**1. Install a TeX distribution.**
+
+*macOS.* MacTeX is the full distribution — around 5 GB, but everything this
+template needs is included and you will not have to chase missing packages:
+
+```bash
+brew install --cask mactex
+```
+
+No Homebrew? Download the installer from [tug.org/mactex](https://tug.org/mactex/).
+After installing, open a new terminal so `/Library/TeX/texbin` is on your `PATH`.
+
+If disk space is tight, BasicTeX is about 100 MB, but you then install the
+packages yourself:
+
+```bash
+brew install --cask basictex
+sudo tlmgr update --self
+sudo tlmgr install latexmk texcount collection-latexextra \
+                   collection-fontsrecommended collection-mathscience
+```
+
+*Windows.* Install [MiKTeX](https://miktex.org/download), which fetches missing
+packages on demand as you compile — accept the prompts the first time you build.
+Tick "install packages on the fly" during setup. [TeX Live](https://tug.org/texlive/windows.html)
+works too and is more self-contained.
+
+*Linux (Debian/Ubuntu).* The full distribution is the least trouble:
+
+```bash
+sudo apt update && sudo apt install texlive-full
+```
+
+For a smaller install:
+
+```bash
+sudo apt install texlive-xetex texlive-latex-extra texlive-fonts-extra \
+                 texlive-bibtex-extra texlive-science latexmk texcount
+```
+
+Arial is not present on most Linux systems. The template detects this and falls
+back to TeX Gyre Heros, a metrically similar sans-serif face, so it still
+compiles and still satisfies the §6.1 guidance.
+
+**2. Get the template.**
 
 ```bash
 git clone https://github.com/Jill0099/cardiff-business-school-phd-thesis-template.git
 cd cardiff-business-school-phd-thesis-template
+```
+
+Prefer not to use git? **Code → Download ZIP** on GitHub, then unzip.
+
+**3. Build it.**
+
+```bash
+latexmk main.tex
+```
+
+The PDF lands at `build/main.pdf`. First run takes a minute or so, since latexmk
+compiles several times to resolve the contents list and cross-references.
+
+**4. Check the install worked.**
+
+```bash
+./tools/wordcount.sh
+```
+
+You should see a count and the 80,000-word limit. If `texcount` is missing,
+install it — it ships with TeX Live but BasicTeX omits it.
+
+### Editor setup (optional)
+
+The repository includes `.vscode/settings.json`, so if you use
+[VS Code](https://code.visualstudio.com/) with the
+[LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop)
+extension, the XeLaTeX recipe and output directory are already configured —
+open the folder and press **Ctrl/Cmd + Alt + B** to build.
+
+For TeXShop, TeXworks or Texmaker, set the typesetting engine to **XeLaTeX**
+and use `latexmk` if the option is offered.
+
+### For the preview images only
+
+`tools/preview.sh` needs two extras. You only need these if you want to
+regenerate the images at the top of this page:
+
+```bash
+brew install poppler && pip3 install Pillow      # macOS
+sudo apt install poppler-utils python3-pil        # Debian/Ubuntu
+```
+
+### If a build fails
+
+| Symptom | Cause |
+|---|---|
+| `Package fontspec Error: The font "Arial" cannot be found` | Compiling with pdfLaTeX instead of XeLaTeX, or an old fontspec. Use `latexmk main.tex`, which forces XeLaTeX via `latexmkrc` |
+| `File 'xyz.sty' not found` | Missing package. MiKTeX: accept the install prompt. TeX Live: `sudo tlmgr install xyz` |
+| Contents list or cross-references show `??` | Not enough passes. `latexmk` handles this; if compiling by hand, run XeLaTeX, then BibTeX, then XeLaTeX twice |
+| `texcount: command not found` | `sudo tlmgr install texcount` |
+| Everything is stale after an edit | `latexmk -C` clears the build directory, then build again |
+
+---
+
+## Quick start
+
+Once installed:
+
+```bash
 latexmk main.tex            # builds build/main.pdf
 ./tools/wordcount.sh        # counts against the 80,000-word limit
 ```
@@ -103,6 +246,8 @@ main.tex                 preamble, metadata block, document assembly
 latexmkrc                build config (XeLaTeX + bibtex + nomenclature)
 references.bib           bibliography
 tools/wordcount.sh       word count against the policy limits
+tools/preview.sh         regenerates the README preview images
+.vscode/settings.json    VS Code + LaTeX Workshop XeLaTeX recipe
 frontmatter/
   titlepage.tex          Appendix 3 title page — do not add to it
   summary.tex            the required summary, max 300 words
@@ -158,14 +303,6 @@ them as you write.
   School choice. Confirm with your supervisor.
 - **`cleveref`** for `\cref{}` cross-references.
 - **CI build** on every push.
-
----
-
-## Requirements
-
-A full TeX distribution (TeX Live 2021+ or MacTeX) with `latexmk` and `texcount`.
-Build with **XeLaTeX** — the template uses `fontspec` and `unicode-math`, which
-pdfLaTeX does not support.
 
 ---
 
