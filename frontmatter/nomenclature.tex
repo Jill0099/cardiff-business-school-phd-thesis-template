@@ -1,0 +1,22 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%--Nomenclature Page--%%%%%%%%%%%%%%%%%%%%%%
+% Requires makeindex to run over the .nlo file. latexmkrc in the repo
+% root wires this up automatically.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\nomname}{Nomenclature}
+\addcontentsline{toc}{chapter}{Nomenclature}
+\setlength{\columnsep}{4pc}
+\setstretch{0.5}
+\renewcommand\nomgroup[1]{%
+  \item[\bfseries
+  \ifstrequal{#1}{A}{List of symbols}{%
+  \ifstrequal{#1}{B}{Physical constants}{}}%
+  ]}
+
+\begin{multicols}{2}
+\nomenclature[A, 01]{\(Y\)}{dependent variable}
+\nomenclature[A, 02]{\(X\)}{variable of interest}
+\nomenclature[A, 03]{\(\beta\)}{coefficient to be estimated}
+\nomenclature[A, 04]{\(\varepsilon\)}{error term}
+\end{multicols}
+
+\printnomenclature

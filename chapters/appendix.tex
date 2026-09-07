@@ -1,0 +1,29 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%--Appendices--%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{appendices}
+
+% Table of contents entries are relabelled "Appendix A", "Appendix B", ...
+\addtocontents{toc}{\protect\renewcommand{\protect\cftchappresnum}{\appendixname\space}}
+\addtocontents{toc}{\protect\renewcommand{\protect\cftchapnumwidth}{6em}}
+
+\begin{singlespace}
+\chapter{Variable Definitions}\label{app:variables}
+\end{singlespace}
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{p{3cm}p{7cm}p{3cm}}
+        \toprule
+        Variable & Definition & Source \\
+        \midrule
+        $Y$       & [Definition of the dependent variable.]      & [SOURCE] \\
+        $X$       & [Definition of the variable of interest.]    & [SOURCE] \\
+        Control 1 & [Definition.]                                & [SOURCE] \\
+        Control 2 & [Definition.]                                & [SOURCE] \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\chapter{Supplementary Results}\label{app:supplementary}
+\lipsum[1]
+
+\end{appendices}

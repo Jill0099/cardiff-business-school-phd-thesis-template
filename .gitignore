@@ -1,0 +1,33 @@
+# LaTeX build output
+build/
+*.aux
+*.bbl
+*.blg
+*.brf
+*.fdb_latexmk
+*.fls
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.nlo
+*.nls
+*.out
+*.synctex.gz
+*.toc
+*.fff
+*.ttt
+*.xdv
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*~
+*.swp
+
+# The compiled thesis -- uncomment to keep the PDF out of version control
+# main.pdf
