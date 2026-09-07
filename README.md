@@ -1,21 +1,22 @@
-# PhD Thesis LaTeX Template
+# Cardiff Business School PhD Thesis LaTeX Template
 
-A clean, university-agnostic LaTeX template for a PhD thesis, built for XeLaTeX
-and structured for a **paper-style (three-essay) thesis** — though it works just
-as well for a monograph.
+A clean LaTeX thesis template for **Cardiff University / Cardiff Business School**
+PhD candidates, built for XeLaTeX and structured for a **paper-style (three-essay)
+thesis** — though it works just as well for a monograph, and nothing in it is
+Cardiff-specific enough to stop you using it at another university.
 
 Everything you personalise lives in one metadata block at the top of `main.tex`.
 The front matter fills itself in from there.
 
-![Build](https://github.com/Jill0099/phd-thesis-latex-template/actions/workflows/build.yml/badge.svg)
+![Build](https://github.com/Jill0099/cardiff-business-school-phd-thesis-template/actions/workflows/build.yml/badge.svg)
 
 ---
 
 ## Quick start
 
 ```bash
-git clone https://github.com/Jill0099/phd-thesis-latex-template.git
-cd phd-thesis-latex-template
+git clone https://github.com/Jill0099/cardiff-business-school-phd-thesis-template.git
+cd cardiff-business-school-phd-thesis-template
 latexmk main.tex          # builds build/main.pdf with XeLaTeX
 ```
 
