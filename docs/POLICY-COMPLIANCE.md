@@ -203,6 +203,76 @@ falls below 10.91 pt (= 11 TeX pt), and `tools/checkfonts.py` will tell you if a
 
 ---
 
+## Verifying this yourself
+
+Two of the three claim types in this table can be checked by machine. Run:
+
+```
+latexmk main.tex
+python3 tools/checkpolicy.py     # clauses checkable against the PDF
+python3 tools/checkfonts.py      # every type size in the output
+./tools/wordcount.sh             # 4.2-4.4
+```
+
+`checkpolicy.py` reads the **compiled PDF**, not the source, so it reports what
+an examiner receives. Current result:
+
+```
+  [PASS] 5.4    No images anywhere (incl. University logo)             0 image XObject(s)
+  [PASS] 5.3    Title page carries only the permitted details          6 line(s), none forbidden
+  [PASS] 6.4a   Title page displays no page number
+  [PASS] 6.4b   Preliminary pages in roman numerals                    9 roman-numbered page(s)
+  [PASS] 6.4c   Arabic sequence starts at 1 after the preliminaries    pdf p11 shows 1
+  [PASS] 6.4d   Numbering continues through appendices and references  last page shows '19'
+  [PASS] 6.1    Body text at 12pt or larger                            11.96pt and up
+  [PASS] 6.3    Nothing outside maths below the 11pt floor
+  [PASS] 6.1b   Sans-serif body face                                   Arial
+  [PASS] 6.2a   Paragraphs left-aligned, not justified                 right-edge spread 17.1pt
+  [PASS] 5.1.2  Summary within 300 words
+  [PASS] 4.2    Within the 80,000-word PhD limit
+
+  12/12 checks passed.
+```
+
+Run it again after you have written your own chapters — the checks that matter
+most (summary length, word count, and whether a `\scriptsize` has crept into a
+table) only become meaningful once there is real content.
+
+---
+
+## Source text
+
+The clauses this template acts on, in the policy's own words, so you can verify
+each row against the [PDF][policy] rather than taking this table on trust. Page
+numbers are the printed numbers in the document.
+
+| Clause | p. | Wording |
+|---|---|---|
+| 4.2.1 | 3 | "PhD (standard format): 80,000 words" |
+| 4.3 | 3 | "excludes the summary, acknowledgements, declarations, contents pages, appendices, tables, diagrams and figures, references, bibliography, footnotes and endnotes" |
+| 4.4 | 3 | "up to 10% more than the stated limit, but only where this is clearly justified" |
+| 5.1 | 5 | "a title page…; a summary of no more than 300 words; a list of contents…; acknowledgements, where this is an expectation of your sponsor" |
+| 5.2 | 5 | "Any other lists (e.g. tables, diagrams, illustrations) should be included separately, immediately after the contents list" |
+| 5.3 | 5–6 | "must include the following details only" — title, degree award title, University name, month and year, candidate's full name |
+| 5.3.4 fn 3 | 6 | after approved corrections "the date on the title page should be the original date of submission" |
+| 5.4 | 6 | "The title page must have a plain background. No images should be used: this includes the University logo" |
+| 5.6 | 6 | a dedication and/or acknowledgements "must appear after the required pages listed above" |
+| 5.7 | 6 | a preface highlighting how papers "relate to the chapters of your thesis" |
+| 6.1 | 6 | "sans serif fonts such as Arial, Tahoma and Verdana… no less than 12 point" |
+| 6.2 | 6 | "left-aligned, rather than justified… e.g. 1.5 spacing" |
+| 6.3 | 6 | "Characters used in all other texts (e.g. footnotes, figure captions) must not be less than 11 point" |
+| 6.4 | 6 | "Page numbers must be displayed on all pages except the title page" |
+| 6.5 | 6 | "Characters used within tables and figures must be legible… The placing of text over images should be avoided" |
+| 7.3 | 7 | collaborators' contributions "should be highlighted in your acknowledgements, as well as clearly referenced within the main text" |
+| 9.2 | 7 | "you should not include any private personal details or other confidential information" |
+| App. 1 | 11 | "Statements and Declarations to be Signed by the Candidate and Submitted loose with the Thesis" |
+| App. 3 | 13 | Title Page Template |
+
+Quoted for verification. The [policy PDF][policy] is the authority; if these
+differ from the current version, the policy wins and this table is stale.
+
+---
+
 ## Summary
 
 Of the clauses that bear on the document itself, all are implemented or written

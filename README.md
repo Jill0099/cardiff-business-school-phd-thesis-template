@@ -176,7 +176,15 @@ Once installed:
 latexmk main.tex               # builds build/main.pdf
 ./tools/wordcount.sh           # counts against the 80,000-word limit
 python3 tools/checkfonts.py    # verifies the 11pt floor (§6.3, §6.5)
+python3 tools/checkpolicy.py   # checks the PDF against the policy
 ```
+
+`checkpolicy.py` inspects the **compiled PDF**, not the source, so it reports what
+an examiner actually receives — no images anywhere (§5.4), nothing forbidden on
+the title page (§5.3), correct roman-then-Arabic pagination with no number on the
+title page (§6.4), a sans-serif body face at 12pt (§6.1), genuinely ragged right
+margins (§6.2), the summary within 300 words (§5.1.2), and the word count
+(§4.2). Run it again once you have written real chapters.
 
 Then edit the metadata block in `main.tex`:
 
@@ -197,8 +205,10 @@ Then edit the metadata block in `main.tex`:
 Every clause of the policy is cross-checked in
 **[docs/POLICY-COMPLIANCE.md](docs/POLICY-COMPLIANCE.md)** — all fifteen sections
 and three appendices, each marked as implemented, noted in the source, your
-action, or not applicable, with the file that handles it. Audited against
-**Version 8.0** (in effect 01.08.2025).
+action, or not applicable, with the file that handles it. It also quotes the
+source wording for every clause the template acts on, so you can verify the
+table against the policy instead of trusting it. Audited against **Version 8.0**
+(in effect 01.08.2025); `tools/checkpolicy.py` re-runs the mechanical part.
 
 These are the points where a generic thesis template gets Cardiff wrong:
 
@@ -260,6 +270,7 @@ latexmkrc                build config (XeLaTeX + bibtex + nomenclature)
 references.bib           bibliography
 tools/wordcount.sh       word count against the policy limits
 tools/checkfonts.py      verifies the 11pt floor in the built PDF
+tools/checkpolicy.py     checks the built PDF against the checkable clauses
 tools/preview.sh         regenerates the README preview images
 docs/POLICY-COMPLIANCE.md  clause-by-clause audit against the policy
 frontmatter/README.md    front-matter order, and why there is no declaration page
