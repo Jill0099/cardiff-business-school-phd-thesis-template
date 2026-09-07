@@ -5,9 +5,10 @@
 %  Compile with:  latexmk main.tex
 %
 %  The defaults below follow Cardiff University's "Policy on the
-%  Submission and Presentation of Research Degree Theses". Clause
-%  numbers are cited inline so you can check each one against the
-%  current version of the policy:
+%  Submission and Presentation of Research Degree Theses",
+%  Version 8.0, approved 08.05.2025, in effect from 01.08.2025.
+%  Clause numbers are cited inline so you can check each one against
+%  the current version of the policy:
 %  https://www.cardiff.ac.uk/__data/assets/pdf_file/0010/1467235/
 %      Submission-and-Presentation-of-Research-Degree-Theses.pdf
 %
@@ -35,6 +36,10 @@
 \newcommand{\thesisauthor}{Candidate's Full Name, as Recorded on the Student Record}
 \newcommand{\thesisdegree}{Doctor of Philosophy}
 \newcommand{\thesisuniversity}{Cardiff University}
+% Which date? Footnote 3 to Section 5.3.4: for a thesis submitted after
+% corrections approved by the examiners, use the ORIGINAL date of
+% submission -- not the date you hand in the corrected version. For a
+% re-examination, use the date of re-submission.
 \newcommand{\thesisdate}{Month Year}
 
 % Not printed on the title page -- used elsewhere in the front matter.
@@ -100,6 +105,10 @@
 \usepackage[titles]{tocloft}
 \usepackage[round,sort,comma]{natbib}
 \usepackage[page]{appendix}
+% Policy Section 4.1: the thesis must be in English or Welsh, apart from
+% quotations and recognised technical terms. For Welsh, use
+% \usepackage[welsh]{babel} and check that your hyphenation patterns
+% are installed.
 \usepackage[english]{babel}
 \usepackage{csquotes}
 \usepackage{upquote}
@@ -163,12 +172,46 @@
 
 \addto{\captionsenglish}{\renewcommand{\bibname}{References}}
 
-% Policy Section 6.3: footnotes and captions must be no smaller than
-% 11 point. With a 12pt base, \footnotesize would fall below that.
+% Policy Section 6.3: characters in all other text -- footnotes, figure
+% captions and the like -- "must not be less than 11 point". Section 6.5
+% extends the same requirement to characters inside tables and figures.
+%
+% At a 12pt base, LaTeX's \footnotesize (10pt), \scriptsize (8pt) and
+% \tiny (6pt) all fall below that floor, and table notes and stars
+% conventionally use them. Redefining them to 11pt keeps the document
+% compliant even where a chapter reaches for a smaller size. \small is
+% already 11pt at this base and is left alone.
+%
+% If you find yourself wanting something smaller to make a wide table
+% fit, the compliant fixes are a landscape page (\begin{landscape}),
+% splitting the table, or dropping columns -- not shrinking the type.
 %TC:macro \footnote [ignore]
 \usepackage[hang,flushmargin]{footmisc}
 \renewcommand{\footnotesize}{\fontsize{11pt}{13pt}\selectfont}
+\renewcommand{\scriptsize}{\fontsize{11pt}{13pt}\selectfont}
+\renewcommand{\tiny}{\fontsize{11pt}{13pt}\selectfont}
 \captionsetup{font={stretch=1.0},labelfont=bf,size=normalsize}
+
+% Mathematical superscripts and subscripts are necessarily smaller than
+% body text -- no thesis sets an index at 11pt -- so the 11pt floor above
+% cannot apply to them. But LaTeX's defaults are smaller than they need
+% to be (8.4pt and 6pt at a 12pt base), and Section 6.5 asks that
+% characters inside tables and figures be "legible and of a sufficiently
+% large font size for general accessibility" -- which is precisely the
+% case of significance stars in a regression table. These raise the
+% script levels as far as the notation allows.
+%
+% Verify what actually ends up in your PDF with tools/checkfonts.py.
+% unicode-math re-derives the script levels from the maths font's own
+% OpenType constants when the document begins, which silently undoes a
+% plain \DeclareMathSizes for the body size. Deferring it wins.
+\AtBeginDocument{%
+  \DeclareMathSizes{12}{12}{10}{9}%
+  \DeclareMathSizes{11}{11}{9.5}{9}%
+}
+
+% Section 6.5 also asks that text not be placed over images. If you
+% annotate a figure, put the labels beside the image or in the caption.
 
 % Hyperlinks -- loaded late; cleveref must follow hyperref.
 \usepackage[bookmarks=true, hidelinks]{hyperref}

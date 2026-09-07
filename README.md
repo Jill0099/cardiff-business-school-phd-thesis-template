@@ -35,23 +35,15 @@ the output.
 
 ---
 
-> **Scope of what has been checked.** Every row in the table below was read out
-> of the [policy PDF][policy] and is cited by clause, so you can re-check each
-> one in a few minutes. Two caveats:
+> **One gap you should know about.** §8 permits a "thesis with publication" and
+> governs it through a *separate* document — *Guidance on the Inclusion of Papers
+> and Published Work* — which is not on the public website. Since this template is
+> shaped for a paper-style thesis, get that guidance from your PGR office and
+> check the chapter structure and preface against it. Every other clause is
+> cross-checked in [docs/POLICY-COMPLIANCE.md](docs/POLICY-COMPLIANCE.md).
 >
-> - The policy is revised periodically. This reflects the version current when
->   the template was written; the citations exist to make re-checking quick, not
->   to substitute for it.
-> - **The paper-style framing is not policy-checked.** §8.1 permits a "thesis
->   with publication" and directs it to a *separate* document — *Presentation of
->   Research Degree Theses: Guidance on the Inclusion of Papers and Published
->   Work* — which is not on the public website. If you are submitting in that
->   format, get that guidance from the intranet or your PGR office and check the
->   chapter structure and preface against it. Everything below still applies;
->   that guidance may add to it.
->
-> The policy also covers PhD, MD, EngD, professional doctorates and MPhil only
-> (§1.1–1.2): not the PhD by Published Works, higher doctorates or MRes.
+> The policy is revised periodically and covers PhD, MD, EngD, professional
+> doctorates and MPhil only (§1.1–1.2).
 
 ---
 
@@ -181,8 +173,9 @@ sudo apt install poppler-utils python3-pil        # Debian/Ubuntu
 Once installed:
 
 ```bash
-latexmk main.tex            # builds build/main.pdf
-./tools/wordcount.sh        # counts against the 80,000-word limit
+latexmk main.tex               # builds build/main.pdf
+./tools/wordcount.sh           # counts against the 80,000-word limit
+python3 tools/checkfonts.py    # verifies the 11pt floor (§6.3, §6.5)
 ```
 
 Then edit the metadata block in `main.tex`:
@@ -201,35 +194,34 @@ Then edit the metadata block in `main.tex`:
 
 ## What the policy actually requires
 
-These are the points where a generic thesis template gets Cardiff wrong. Each is
-already handled here.
+Every clause of the policy is cross-checked in
+**[docs/POLICY-COMPLIANCE.md](docs/POLICY-COMPLIANCE.md)** — all fifteen sections
+and three appendices, each marked as implemented, noted in the source, your
+action, or not applicable, with the file that handles it. Audited against
+**Version 8.0** (in effect 01.08.2025).
+
+These are the points where a generic thesis template gets Cardiff wrong:
 
 | Policy | Requirement | How the template handles it |
 |---|---|---|
-| §5.3 | The title page carries **five items only**: full title, degree award title, University name, month and year, and your full name as recorded on the student record | `frontmatter/titlepage.tex` reproduces the Appendix 3 template exactly. No department, school, supervisor or student number |
+| §5.3 | The title page carries **five items only**: full title, degree award title, University name, month and year, and your full name as recorded on the student record | Reproduces the Appendix 3 template exactly. No department, school, supervisor or student number |
 | §5.4 | "The title page must have a plain background. **No images should be used: this includes the University logo**" | No logo anywhere in the repo |
-| §5.1 | Required preliminary pages: title page, summary (**max 300 words**), contents list, and acknowledgements where a sponsor expects them | Assembled in that order in `main.tex` |
-| §5.2 | Lists of tables and figures go **immediately after** the contents list | Ordered accordingly |
-| §5.6 | Dedication and acknowledgements come **after** the required pages | Ordered accordingly |
-| §5.7 | A preface may explain how any papers you authored or co-authored relate to the **chapters** of the thesis | `frontmatter/preface.tex` — but see the caveat above; §8 sends paper-format theses to separate guidance |
-| §7.3 | Contributions from collaborators go in the **acknowledgements**, and must be referenced in the main text | Noted in `frontmatter/acknowledgements.tex` |
-| §9.2 | No contact details or confidential information about yourself or others, anywhere in the thesis | Noted in `frontmatter/acknowledgements.tex` |
-| §4.7 | Appendices where the material is a useful addition to the work | Noted in `chapters/appendix.tex` |
+| §5.3.4 fn 3 | After corrections, the title page keeps the **original submission date** — not the date you hand in the corrected version | Noted on `\thesisdate` in `main.tex` |
 | §6.1 | Font recommended for easy reading — **sans serif** such as Arial, Tahoma, Verdana — at **no less than 12 pt** | Arial by default, with a one-line switch back to Times |
-| §6.2 | **Left-aligned, not justified**; line spacing wide enough for accessibility, "e.g. 1.5" | `\RaggedRight` and `\onehalfspacing` |
-| §6.3 | Footnotes and captions **no smaller than 11 pt** | `\footnotesize` redefined to 11 pt |
-| §6.4 | Roman numerals for preliminary pages, then a single Arabic sequence to the end; page numbers on **every page except the title page** | Handled in `main.tex`; no `\thispagestyle{empty}` on chapter openings |
-| §4.2 | PhD (standard format): **80,000 words** | `tools/wordcount.sh` |
-| §4.3 | The count **excludes** summary, acknowledgements, declarations, contents, appendices, tables, diagrams and figures, references, bibliography, footnotes and endnotes | Encoded as TeXcount directives in `main.tex` |
+| §6.2 | **Left-aligned, not justified**; spacing wide enough for accessibility, "e.g. 1.5" | `\RaggedRight` and `\onehalfspacing` |
+| §6.3, §6.5 | All other text — footnotes, captions, **and characters inside tables and figures** — no smaller than 11 pt | `\footnotesize`, `\scriptsize` and `\tiny` redefined to 11 pt; maths script levels raised so table significance stars are legible. Verify with `python3 tools/checkfonts.py` |
+| §6.4 | Roman then a single Arabic sequence; page numbers on **every page except the title page** | Title page opens the roman sequence as page i showing no number; no `\thispagestyle{empty}` on chapters |
+| §5.1, §5.2, §5.6 | Required pages in order, then other lists, then optional pages | Assembled in that order; see `frontmatter/README.md` |
+| §4.2, §4.3 | PhD **80,000 words**, excluding summary, acknowledgements, contents, appendices, tables and figures, references and footnotes | `tools/wordcount.sh`, with the exclusions encoded as TeXcount directives |
 
-**There is no declaration page in this template, and that is deliberate.** The
-statements and declarations are, in the policy's own words, "to be Signed by the
-Candidate and Submitted **loose with the Thesis**" (Appendix 1) — so they are not
-bound in and not typeset. The final word count goes on that form too (§5.5),
-not in the thesis.
+**There is no declaration page, and that is deliberate.** Appendix 1 is headed
+"Statements and Declarations to be Signed by the Candidate and **Submitted loose
+with the Thesis**" — a separate official form, not typeset into the thesis. The
+word count goes on it too (§5.5). See
+[`frontmatter/README.md`](frontmatter/README.md).
 
-If you have seen older Cardiff theses with a bound-in declaration page, that is
-why: the requirement changed. Check the current form with your PGR office.
+If you have seen older Cardiff theses with a bound-in declaration page, the
+requirement changed.
 
 ---
 
@@ -267,7 +259,10 @@ main.tex                 preamble, metadata block, document assembly
 latexmkrc                build config (XeLaTeX + bibtex + nomenclature)
 references.bib           bibliography
 tools/wordcount.sh       word count against the policy limits
+tools/checkfonts.py      verifies the 11pt floor in the built PDF
 tools/preview.sh         regenerates the README preview images
+docs/POLICY-COMPLIANCE.md  clause-by-clause audit against the policy
+frontmatter/README.md    front-matter order, and why there is no declaration page
 .vscode/settings.json    VS Code + LaTeX Workshop XeLaTeX recipe
 frontmatter/
   titlepage.tex          Appendix 3 title page — do not add to it
