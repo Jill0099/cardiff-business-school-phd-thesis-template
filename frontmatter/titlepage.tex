@@ -1,32 +1,38 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%--Title Page--%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Driven by the metadata macros defined at the top of main.tex.
+% Reproduces the title page template at Appendix 3 of the University's
+% "Policy on the Submission and Presentation of Research Degree Theses".
+%
+% Section 5.3 -- the page must contain these details ONLY:
+%   .1 the full title of the thesis, including any sub-title
+%   .2 the degree award title for which the thesis is presented
+%   .3 the University name
+%   .4 the month and year of presentation
+%   .5 the candidate's full name, as recorded on the student record
+%
+% Section 5.4 -- "The title page must have a plain background. No
+% images should be used: this includes the University logo."
+%
+% So do not add your school, department, supervisors, student number,
+% or a crest. Edit the values in main.tex, not this file.
+%
+% Section 6.4 -- page numbers appear on every page except this one.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
 \thispagestyle{empty}
-\pagenumbering{gobble}
 
 \begin{center}
-    \vspace*{1cm}
-    \includegraphics[width=0.4\textwidth]{\thesislogo}
+    \vspace*{3cm}
 
-    \vspace{2cm}
+    {\LARGE \bfseries \thesistitle}\\[3cm]
 
-    {\LARGE \bfseries \thesistitle}\\[1.5cm]
+    {\large \thesisauthor}\\[3cm]
 
-    {\large A thesis submitted in partial fulfilment of the requirements for the degree of}\\[0.2cm]
-    {\Large \textbf{\thesisdegree}}\\
-    {\large at \thesisuniversity}\\[1cm]
+    {\large A thesis submitted for the degree of \thesisdegree}\\[0.6cm]
 
-    \vspace{1cm}
-    {\Large \textbf{\thesisauthor}}\\[0.5cm]
+    {\large \thesisuniversity}\\[0.6cm]
 
-    \vspace{2cm}
-    {\large \thesisdepartment}\\
-    {\large \thesisschool}\\
-    {\large \thesisuniversity}\\[1.5cm]
+    {\large \thesisdate}
 
     \vfill
-    {\large \thesisdate}
 \end{center}
 
-\setcounter{page}{0}
+\clearpage
